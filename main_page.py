@@ -8,9 +8,13 @@ from pyecharts.faker import Faker
 st.set_page_config(layout="wide")
 st.markdown('# Board historical value')
 
+@st.cache
+def load_data():
+    DFindex = pd.read_csv('data/index_history.csv')
+    DFboard = pd.read_csv('data/board_history.csv')
+    return (DFindex, DFboard)
+DFindex, DFboard = load_data()
 
-DFindex = pd.read_csv('data/index_history.csv')
-DFboard = pd.read_csv('data/board_history.csv')
 
 Lboard = DFboard.iloc[:, 1:].columns.to_list()
 Lindex_all = DFindex.iloc[:, 1:].columns.to_list()
